@@ -1,6 +1,5 @@
 rm(list=ls())
 library(plotrix)
-#install.packages("ggplot2")
 library(ggplot2)
 
 d1 <- read.csv("~/Desktop/aliens_anayses/aliens_adults_opposites_special_and_noSpecial.csv")
