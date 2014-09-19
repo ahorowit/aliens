@@ -82,7 +82,7 @@ agg.data3$err <- sqrt((agg.data3$prop.corr * agg.data3$q) / agg.data3$total)
 
 agg.data2 <- rbind (agg.data, agg.data3)
 
-plot.style <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), axis.line = element_line(colour="black",size=.5), axis.ticks = element_line(size=.5),legend.justification=c(1,0),legend.position=c(0.15,.75),legend.title=element_blank(), axis.title.x = element_text(vjust=-.5), axis.title.y = element_text(angle=90,vjust=0.25))
+plot.style <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), axis.line = element_line(colour="black",size=.5), axis.ticks = element_line(size=.5),legend.justification=c(1,0),legend.position=c(0.17,.74),legend.title=element_blank(), axis.title.x = element_text(vjust=-.5), axis.title.y = element_text(angle=90,vjust=0.25))
 
 
 agg.data2$age <- if(agg.data2$older=="0", agg.data2$age=="4.0--4.5")
