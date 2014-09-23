@@ -109,7 +109,7 @@ qplot(data = agg.data2,
 
 
 
-glmer1 <- glmer(correct ~ contrasts*older
+glmer1 <- glmer(correct ~ contrasts*agegroup
 	+ (contrasts|Sub_ID) + (contrasts|alien), 	
 	family="binomial", data=data) 
 summary(glmer1)
@@ -123,7 +123,7 @@ summary(glmer2)
 
 
 
-glmer3 <- glmer(correct ~ book_type*contrasts
+glmer3 <- glmer(correct ~ book_type*contrasts*agegroup
 	+ (contrasts|Sub_ID) + (contrasts|alien), 	
 	family="binomial", data=data) 
 summary(glmer3)
@@ -210,11 +210,11 @@ summary(int.glmer)
 twob <- data[data$book_type=="Experiment 2b",]
 twob$contrasts <- factor(twob$contrasts,levels=c("Size","Feature"))
 
-int.NoSpecial <- glmer(correct ~ contrasts*older+(contrasts|Sub_ID) + (1|alien), family="binomial", data=twob) 
+int.NoSpecial <- glmer(correct ~ contrasts*agegroup+(contrasts|Sub_ID) + (1|alien), family="binomial", data=twob) 
 summary(int.NoSpecial)
-aggregate(correct ~ contrasts + older + alien, data=twob, mean)
+aggregate(correct ~ contrasts + agegroup + alien, data=twob, mean)
 
 ## Expt 3 (opposite pairs) only 
-int.pairs <- glmer(correct ~ contrasts*older+(contrasts|Sub_ID) + (1|alien), family="binomial", data=data[data$book_type=="Experiment 3",]) 
+int.pairs <- glmer(correct ~ contrasts*agegroup+(contrasts|Sub_ID) + (1|alien), family="binomial", data=data[data$book_type=="Experiment 3",]) 
 summary(int.pairs)
 
