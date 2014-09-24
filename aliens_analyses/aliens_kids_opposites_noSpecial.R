@@ -123,7 +123,7 @@ summary(glmer2)
 
 
 
-glmer3 <- glmer(correct ~ book_type*contrasts*agegroup
+glmer3 <- glmer(correct ~ book_type*contrasts+agegroup
 	+ (contrasts|Sub_ID) + (contrasts|alien), 	
 	family="binomial", data=data) 
 summary(glmer3)
