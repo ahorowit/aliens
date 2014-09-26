@@ -122,7 +122,6 @@ We constructed the experiment as a storybook, illustrated with colorful clipart 
 % Training trials were similar but showed familiar items (e.g. chocolate milk as the induction example, with plain milk and orange juice as the generalization stimuli).  
 Size terms were \emph{small} (vs. big), \emph{long} (vs. short), \emph{tall} (vs. short), and \emph{short} (vs. long);  feature contrasts were \emph{broken} (vs. unbroken), \emph{pointy} (vs. smooth), \emph{dirty} (vs. clean), and \emph{wet} (vs. dry).  To ensure that children were familiar with the words we used, we included a posttest of two-alternative displays.  Children were able to recognize all of the contrasts used in our task, with 90\% for 3--3.5 year-olds, 95\% for 3.5--4.0 year-olds, 96\% for 4.0--4.5 year-olds, and 98\% for 4.5--5.0 year-olds.  
 
-
 \subsubsection{Procedure}
 
 The experimenter read the storybook with children individually in a quiet room at either Bing Nursery School of the San Jose Children's Discovery Museum.  At the museum, parents accompanied children and sat either next to or behind the child.  Siblings were sometimes also present, and were offered quiet activities such as coloring or reading. 
@@ -139,88 +138,79 @@ The task was adapted to an online format for adult participants.  Adults viewed 
 
 \begin{figure}[t] 
   \begin{center} 
-    \includegraphics[width=5in]{figures/expt1_kidsAdults.pdf} 
-    \caption{\label{fig:expt1_kidsAdults} Mean proportion correct for preschoolers and adults in Experiment 1. Yellow bars depict feature adjective trials and red bars depict size trials. Dashed line represents chance; error bars show standard error of the mean.}
+    \includegraphics[width=5in]{figures/expt1.pdf} 
+    \caption{\label{fig:expt1_kidsAdults} Mean proportion correct for preschoolers and adults in Experiment 1. Yellow bars depict feature adjective trials and red bars depict size trials. Dashed line represents chance; error bars show 95\% confidence intervals computed by non-parametric bootstrap.}
     %95\% confidence intervals.} 
   \end{center} 
   % \vspace{-2.0ex} 
 \end{figure}	
 
-We categorized a response as correct (representing a contrast inference) if children selected the item that differed from the exemplar along the referenced dimension (e.g., they chose the short item if the exemplar was referred to as ``tall,'' but the clean item if it was described as ``dirty'').  Preschoolers' ability to make correct contrast inferences increased across the age range we tested.  
+Preschoolers' ability to make correct contrast inferences increased across the age range we tested (Figure \ref{fig:expt1_kidsAdults}).\footnote{Data and analysis code can be found at \url{http://github.com/ahorowit/aliens}.} We categorized a response as correct (representing a contrast inference) if children selected the item that differed from the exemplar along the referenced dimension (e.g., they chose the short item if the exemplar was referred to as ``tall,'' but the clean item if it was described as ``dirty''). The youngest children in our sample were numerically above chance in their responding across categories ($M=.61$) but were only marginally above chance, consolidating across adjective types ($t(23) = 1.84$, $p = .08$). All other groups were above chance (all $p$s $< .01$). 
 
-The youngest children in our sample did not demonstrate systematic inferences to adjective information; 3--3.5 year--olds selected the adjective match and the adjective contrast at chance levels when selecting another example of a category member with the referent.  However, by age 3.5, children predictively selected the contrasting property to the adjective named.  Within the early preschool years, children appear to gain sensitivity in assessing speakers' word choice information and the implicit contrast information it may contain. 
+To measure differences across adjective types and age groups, we used logistic mixed effect model, predicting correct responses as the interaction of age and contrast type, with random effects of participant and item.  Children made increasingly more correct contrast judgments with age ($\beta = 1.52$, $p < .0001$). There was no significant effect of contrast type (feature vs. size adjectives), and there was no interaction between age and contrast type, suggesting that participants across ages did not differ in their responses to different property types.  Overall, these analyses show that children demonstrate an increasing sensitivity to implicit contrast information from adjectives.  
 
-Overall, we see that, although even the youngest children in our sample were familiar with the adjectives and their contrast alternatives used in our task, children younger than age 3--and--a--half were unable to reliably use adjective information to infer implicit contrast information.  However, children ages 3.5--4.0 were reliably above chance in selecting the contrast property when size terms were used, and marginally above chance when feature contrasts were used.  Children ages 4.0--4.5 and 4.5--5.0 were reliably above chance in selecting the property contrast across both feature and size terms.  The oldest children matched the performance level of adults, who made contrast selections robustly above chance for both adjective types ($p < .001$ in exact binomial tests for feature and size terms). 
+% Rather than selecting the image that matched the named property, adults and children both selected the contrasting property.  
 
-We analyzed our results using a logistic mixed model, predicting correct responses as an interaction between age and contrast type with random effects of participant and shape.  Children increasingly made more correct contrast judgments with age ($\beta = 1.51$, $p < .0001$). 
-% There was a significant effect of age, such that children increasingly made more correct contrast judgments with age ($\beta = 1.51$, $p < .0001$).   
-There was no significant effect of contrast type (feature vs. size adjectives), and there was no interaction between age and contrast type, suggesting that participants across ages did not differ in their responses to different property types.  Overall, these analyses show that children demonstrate an increasing sensitivity to implicit contrast information from adjectives.  
 
-%Adults selected the contrasting dimension more often than chance and at nearly identical rates for both adjective types ($p < .001$ in exact binomial tests for feature and size terms; see Figure \ref{fig:expt1_kidsAdults}).  Our results indicate that participants used the adjective referenced to make inferences about properties of novel category members, suggesting that adjectives are informative indicators of relevant property information to adults.  They were able to consider the labeled property in order to infer that other novel category members are likely to differ along the referenced dimension. 
-
-Adults had no difficulty inferring contrast from adjective use in our task, and preschoolers showed a developmental increase in performance before reaching that of adults by age 5.  Our results indicate that adults and young children are sensitive to the contrastive implications of speakers' use of adjectives.  Rather than selecting the image that matched the named property, adults and children selected the property contrast.  Inferences about relevant implied alternatives may allow listeners to pick up on socially-relevant information conveyed through production choices. 
-
+% Adults had no difficulty inferring contrast from adjective use in our task, and preschoolers showed a developmental increase in performance before reaching that of adults by age 5.  
 
 
 \section{Experiment 2}
 
-In our first set of experiments, we found that adults consistently made contrast inferences from adjective use, while preschoolers gained sensitivity to how speakers mark relevant property information with age.  They may begin by appreciating that scalar opposites are paired, and that use of one term (e.g. \emph{wet}) implies contrast with its opposite (i.e. \emph{dry}). We next wanted to investigate the robustness of children's contrast inferences for opposite terms.  In Experiment 2, we removed the contrastive framing (i.e. stating that ``this is a special kind of...'' ) to examine childrenÕs sensitivity to adjective use as the only cue to contrast.  We assigned children to one of three conditions: in the \emph{adjective only}, we measured 4-year-olds' and a comparison group of adults' contrast inferences from adjective production alone (e.g. ``This is a tibu. This is a small tibu.''). This change allowed us to examine listeners' sensitivity to implied contrast from scalar terms without the support of other pragmatic cues.  We were concerned that the subtlety of both identifying the adjective as an informative word choice and also inferring category membership based on its property contrasts might be difficult for children to process spontaneously, so we attempted to alleviate this cognitive burden through two priming conditions: in the \emph{paired order} book condition, we read a book of opposites before introducing children to the experimental task to remind them of the contrastive nature of adjectives.  In the \emph{scrambled order} condition, we read the same book of opposite terms to children, but in a scrambled order so that they heard all the same terms but not used as direct contrasts.  Although adults had no difficulty inferring contrast information from adjective use alone, preschoolers had more difficulty, but their contrast inferences improved moderately after reading the opposite pairs book, and slightly less so for the scrambled book.  Children may initially require support to recognize the informative of adjective use before spontaneously making contrast inferences from these word choices alone. 
+% In our first set of experiments, we found that adults consistently made contrast inferences from adjective use, while preschoolers gained sensitivity to how speakers mark relevant property information with age.  They may begin by appreciating that scalar opposites are paired, and that use of one term (e.g. \emph{wet}) implies contrast with its opposite (i.e. \emph{dry}). 
+
+In Experiment 1, we provided a supportive scaffolding to help children recognize that adjectives were being used contrastively: We told them explicitly that ``this is a special kind of tibu.''  In Experiment 2, we removed this contrastive framing to test whether the older children (who succeeded handily in Experiment 1) could still make contrast inferences based on the presence of a contrasting adjective alone, a far more subtle cue. Our revised framing was ``This is a tibu. This is a small tibu.'' 
+
+We hypothesized that this \emph{adjective only} condition would make the contrast inference substantially more difficult. Previous work on pragmatic inference has suggested that one major problem for preschool children in making inferences about contrasting terms is summoning to mind alternative terms that could have been used \cite{barner2011}. For this reason, we attempted to alleviate this burden by providing children with pre-training on the relevant contrasts of interest. In the \emph{alternatives pre-exposure} condition, we read children a book highlighting featural opposites prior to the experimental task.
 
 
 \subsection{Methods}
 
 \subsubsection{Participants}
-A new sample of 144 children was recruited from Bing Nursery School.  Because of the presumed increased difficulty of this task, we recruited children from the older age groups: 4.0--4.5 years (n=72, mean age 4;3) and 4.5---5.0 years (n=72, mean age 4;8).  A third of children in each age group (24 younger 4s and 24 older 4s) were randomly assigned to each of the three conditions (\emph{adjective only}, \emph{paired order} pre-test book, or \emph{scrambled order} pre-test book). 
 
-We also ran a new group of 128 adult participants in the \emph{adjective only} condition on Amazon's Mechanical Turk.  All participants were reported to be US residents and native English speakers.  They were informed that the task was designed for children.  Seven were excluded for failing to complete the task. 
+A new sample of 96 children was recruited from Bing Nursery School.  Because of the presumed increased difficulty of this task, we recruited children from the older age groups: 4.0--4.5 years (n=48, mean age FIXME) and 4.5---5.0 years (n=48, mean age FIXME).  Half of the children in each age group (24 younger 4s and 24 older 4s) were randomly assigned to each of the conditions (\emph{Adjective Only} and \emph{Alternatives Pre-exposure}). 
+
+We also ran a new group of 128 adult participants in the \emph{Adjective Only} condition on Amazon's Mechanical Turk.  All participants were reported to be US residents and native English speakers.  They were informed that the task was designed for children.  Seven were excluded for failing to complete the task. 
 
 \subsubsection{Materials}
-Stimuli were identical to Experiment 1 with the addition of one of two separate training books read prior to the testing procedure.  Each training book consisted of clip art images of familiar items depicting the size and feature contrasts portrayed in the test book. The training books were identical except for the ordering of the pages. In the \emph{paired} condition, opposites were paired so that scalar contrasts were viewed simultaneously and stated consecutively (e.g. ``Here is a small teddybear.  Here is a big teddybear.'')  In the \emph{scrambled} condition, the orders of the pages were mixed up so that consecutive pages conveyed a size and a feature description, and opposites never appeared together (e.g. ``Here is a small teddybear.  Here is a wet car.'') Sample images are presented in Figure \ref{fig:book_demo}.
-
 
 \begin{figure}[t] 
   \begin{center} 
-    \includegraphics[width=6in]{figures/aliens_book_demo.png} 
-    \caption{\label{fig:book_demo} Sample images from the adjectives naming books used in Experiment 3.  The top row depicts two pages of the \emph{paired} condition, in which opposite terms were labeled consecutively (e.g.  ``Here is a small teddybear. Here is a big teddybear.'' and ``Here is a wet car. Here is a dry car.'').  The bottom row depicts two pages of the \emph{scrambled} condition, in which individual opposite terms were interspersed rather than appearing together (e.g. ``Here is a small teddybear. Here is a wet car.'' and ``Here are clean socks. Here is a tall tower of blocks.'').}
+    \includegraphics[width=4in]{figures/aliens_book_demo_mod.png} 
+    \caption{\label{fig:book_demo} Sample images from the adjective naming book used in Experiment 3.}
   \end{center} 
-\end{figure}	
+\end{figure}
+
+Stimuli were identical to Experiment 1. In the Alternatives Pre-exposure condition, participants read a book prior to the testing procedure.  The book consisted of clip art images of familiar items depicting the size and feature contrasts portrayed in the test book. Opposites were paired so that scalar contrasts were viewed simultaneously and stated consecutively (e.g. ``Here is a small teddybear.  Here is a big teddybear.'')  Sample images are presented in Figure \ref{fig:book_demo}.
 
 
 \subsubsection{Procedure}
-Procedures for the experimental task were identical to Experiment 1 with the exception that the referential phrase was minimized by removing the phrase ``special kind of'' to reduce contrast cues other than the adjective.  Instead, participants heard only ``This is a [tibu]. This is a [broken tibu],'' isolating the adjective as the only available indicator of category membership.  As in Experiment 1, adult participants were randomly assigned to a single test trial presented online. 
 
-Children in the \emph{paired order} and \emph{scrambled order} book conditions were told that they would be reading two books for the session.  The procedure was identical to that of Experiment 2 with the addition of an adjectives naming book immediately preceding the test book. The experimenter read the adjectives book with children, labeling each picture in a neutral way on each page (e.g. ``Here is a small teddybear. Here is a big teddybear.'').  The books were identical except for the order. Although the properties used in adjectives naming books were the same as those in the test book, no child explicitly noted any connection between the books. 
-
+Procedures for the experimental task were identical to Experiment 1 with the exception that the referential phrase was minimized by removing the phrase ``special kind of'' to reduce contrast cues other than the adjective.  Instead, participants heard only ``This is a [tibu]. This is a [broken tibu].''  Children in the Alternatives Pre-exposure condition were told that they would be reading two books in the experimental session. The experimenter read the adjectives book with children, labeling each picture in a neutral way on each page (e.g. ``Here is a small teddybear. Here is a big teddybear.''). As in Experiment 1, adult participants were randomly assigned to a single test trial presented online.  
 
 \subsection{Results and discussion}
 
-
 \begin{figure}[t] 
   \begin{center} 
-    \includegraphics[width=6in]{figures/expt2_kidsAdults.pdf} 
-    \caption{\label{fig:expt2_kidsAdults} Results from Experiment 2.  Preschoolers' and adults' proportion correct performance for the \emph{adjective only} condition are shown on the left, followed by preschoolers' performance for the \emph{paired} contrasts (middle) and \emph{scrambled}  contrasts (right) pretest book conditions. The dashed line represents chance (0.5). Error bars show standard error.}
+    \includegraphics[width=6in]{figures/expt2.pdf} 
+    \caption{\label{fig:expt2_kidsAdults} Preschoolers' and adults' proportion correct performance for the \emph{Adjective Only} and \emph{Alternatives Pre-exposure} conditions in Experiment 2. Dashed line shows chance performance; error bars show 95\% confidence intervals.}
   \end{center} 
   % \vspace{-2.0ex} 
 \end{figure}
 
+With the removal of supportive language indicating contrast, performance in Experiment 2 was substantially lower than in Experiment 1. Performance in size trials was especially low, while performance in feature trials remained higher. 
+
+Nevertheless, even in the Adjective Only condition, 4.5-year-olds were above chance in their performance across tr
 
 
-	
-%\begin{figure}[t] 
-%  \begin{center} 
-%    \includegraphics[width=3in]{figures/adults2.pdf} 
-%    \caption{\label{fig:adults_plot} Adults' mean proportion correct performance in Experiments 1a and 2a. Feature trials are plotted in yellow and size trials in red. The dashed line represents chance (0.5). }
-%    %Error bars represent 95\% confidence intervals.} 
-%  \end{center} 
-%  % \vspace{-2.0ex} 
-%\end{figure}	
+Although preschoolers showed increasing contrast selections from adjective use with age in Experiment 1b, they were essentially at chance when the contrastive language framing was removed.  
+
+We again analyzed our results using a logistic mixed model. We initially fit a mixed
+
+ predicting correct responses as an interaction between age and contrast type with random effects of participant and shape, and we found no significant effects and no significant interaction. In post-hoc followup tests, older 4s showed a significant feature contrast bias ($p  = .001$, exact binomial test), but this contrast was not reliable in the full model when controlling for participant and item effects, and may have been driven primarily by the ``broken'' and ``clean'' items. Although adults remained attentive to implicit contrast information in both the contrastive language and adjective only framings, children performed substantially worse without the additional linguistic cues to guide their contrast judgements.  
 
 
-Although preschoolers showed increasing contrast selections from adjective use with age in Experiment 1b, they were essentially at chance when the contrastive language framing was removed.  We analyzed our results using a logistic mixed model, predicting correct responses as an interaction between age and contrast type with random effects of participant and shape, and we found no significant effects and no significant interaction. In post-hoc followup tests, older 4s showed a significant feature contrast bias ($p  = .001$, exact binomial test), but this contrast was not reliable in the full model when controlling for participant and item effects, and may have been driven primarily by the ``broken'' and ``clean'' items. Although adults remained attentive to implicit contrast information in both the contrastive language and adjective only framings, children performed substantially worse without the additional linguistic cues to guide their contrast judgements.  
-
-UPDATE THIS INFO WITH LAST FEW KIDS
-
-As above, we measured the proportion of correct contrast judgments for which participants selected the test picture that differed along the referenced property dimension.  Adults performance was significantly about chance ($p < .001$ in exact binomial tests for feature and size terms) and did not differ by adjective type.  They showed only a slight decrease in performance in this adjective only framing from the contrastive language framing in Experiment 1c (see Figure \ref{fig:expt2_kidsAdults}).  These results indicate that adjective use in our task is a strong indicator of relevant property information of novel category members for adults.  Their nearly equal performance across Experiment 1a and 2a suggests that adjectives provided salient cues to implicit contrast dimensions on their own without the necessity of additional semantic support. 
+% As above, we measured the proportion of correct contrast judgments for which participants selected the test picture that differed along the referenced property dimension.  Adults performance was significantly about chance ($p < .001$ in exact binomial tests for feature and size terms) and did not differ by adjective type.  They showed only a slight decrease in performance in this adjective only framing from the contrastive language framing in Experiment 1c (see Figure \ref{fig:expt2_kidsAdults}).  These results indicate that adjective use in our task is a strong indicator of relevant property information of novel category members for adults.  Their nearly equal performance across Experiment 1a and 2a suggests that adjectives provided salient cues to implicit contrast dimensions on their own without the necessity of additional semantic support. 
 
 
 Increasing preschoolers' access to relevant linguistic alternatives helped older 4s select property contrasts for both feature and size adjectives.  These results suggest that supporting children's abilities to bring relevant alternatives to mind plays a strong role in their pragmatic inferences. Beyond relying on rich semantic framing cues to intended meaning, which are not always available in natural speech, reminding children of different types of modifiers increases their likelihood of forming contrast inferences from adjectives alone. 

@@ -2,21 +2,7 @@ rm(list=ls())
 library(plotrix)
 library(ggplot2)
 
-d <- read.csv("analysis/aliens_adults_opposites_special_and_noSpecial.csv")
-
-##############################################
-
-###anonymize worker IDs
-anonymize.sids <- function(df, subject_column_label) {
-  subj_col = which(names(df) == subject_column_label) # get workerid column index
-  temp <- data.frame(workerid = unique(df[,subj_col])) # make new df of unique workerids
-  temp$subid <- 1:length(unique(df[,subj_col])) # make list of subids
-  index <- match(df[,subj_col], temp$workerid) 
-  df$subids <- temp$subid[index]
-  df[,subj_col] <- NULL 
-  df$subids  = as.factor(df$subids)
-  return(df)
-}
+d <- read.csv("data/adults.csv")
 
 #Assigning responses to correct or incorrect
 d$Answer.trial1[d$Answer.trial1==""] <- NA
@@ -39,12 +25,8 @@ agg.data$q <- 1 - agg.data$prop.corr
 ##calculating standard error
 agg.data$err <- sqrt((agg.data$prop.corr * agg.data$q) / agg.data$total)
 
-
 ### use ggplot to plot proportion correct by Experiment and trial type
-
 ##set up plot aethetics 
-plot.style <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), axis.line = element_line(colour="black",size=.5), axis.ticks = element_line(size=.5),legend.justification=c(1,0), legend.position=c(1,.85),legend.title=element_blank(), axis.title.x = element_text(vjust=-.5), axis.title.y = element_text(angle=90,vjust=0.25))
-
 dodge <- position_dodge(width=0.9) 
 limits <- aes(ymax = prop.corr + err, ymin=prop.corr - err) 
 
