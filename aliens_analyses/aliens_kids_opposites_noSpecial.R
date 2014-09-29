@@ -104,6 +104,16 @@ qplot(data = agg.data2,
 )  + geom_abline(intercept=.5,slope=0,lty=2) + geom_errorbar(limits,position=dodge,width=0.25) + theme_bw() + plot.style + scale_fill_manual(values=c("orange", "red"))
 
 
+summary(glmer(correct ~ contrasts + (contrasts|Sub_ID), 
+	family="binomial", data=data))
+
+summary(glmer(correct ~ contrasts * agegroup + (contrasts|Sub_ID), 
+	family="binomial", data=data))
+	
+summary(glmer(correct ~ contrasts + agegroup + (contrasts|Sub_ID), 
+	family="binomial", data=data))
+
+
 
 
 
@@ -139,8 +149,11 @@ gl <- glmer(correct ~ book_type + (contrasts | Sub_ID), data=data, family=binomi
 summary(gl)
 
 
-gl <- glmer(correct ~ book_type + contrasts + agegroup + (1 | Sub_ID), data=subset(data,book_type!="scramble"), family=binomial)
+gl <- glmer(correct ~ book_type * contrasts * agegroup + (1 | Sub_ID), data=subset(data,book_type!="Scrambled"), family=binomial)
 summary(gl)
+
+g2 <- glmer(correct ~ book_type * contrasts + (1 | Sub_ID), data=subset(data,book_type!="Scrambled"), family=binomial)
+summary(g2)
 
 
 
