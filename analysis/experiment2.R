@@ -19,11 +19,15 @@ data$agegroup <- as.factor(data$agegroup)
 
 #### AGGREGATE ####
 mss <- ddply(data, .(contrast, book_type, agegroup,Sub_ID), summarise,
-             m = mean(correct))
+             m = mean(correct),
+             age = Age[1])
 ms <- ddply(mss, .(contrast,agegroup, book_type), summarise,
             correct = mean(m),
             cil = ci.low(m),
-            cih = ci.high(m))             
+            cih = ci.high(m))  
+
+## descriptive
+aggregate(age ~ agegroup, mss, mean)
 
 #### ADD ADULTS ####
 adults <- read.csv("data/adults.csv")
