@@ -224,7 +224,7 @@
 \@ifundefined{def@noapacite}%       -- Philip Kime 2008/12/03
   {\@ifundefined{def@man}{%         -- thp 2005/07/23
    \RequirePackage{apacite}[2005/06/08]}
-   {\RequirePackage[bibnewpage]{apacite}[2005/06/08]}}{}
+   {\RequirePackage[]{apacite}[2005/06/08]}}{}
 
 %========== APA Section heading & seriation, from theapa.sty
 
