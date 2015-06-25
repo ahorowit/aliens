@@ -1,6 +1,16 @@
 rm(list=ls())
-source("~/Projects/R/Ranalysis/useful.R") # from github.com/langcog/Ranalysis
-raw.data <- read.csv("data/experiment2.csv")
+library(plyr)
+library(reshape2)
+library(ggplot2)
+library(lme4)
+raw.data <- read.csv("data/experiment1&2.csv")
+
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
 
 #### PREP DATA #### 
 md <- melt.data.frame(raw.data, c("Sub_ID","Age","condition","agegroup","book_type"),

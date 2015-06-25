@@ -1,10 +1,19 @@
 rm(list=ls())
-source("~/Projects/R/Ranalysis/useful.R") # from github.com/langcog/Ranalysis
-raw.data <- read.csv("data/experiment1.csv")
+library(plyr)
+library(reshape2)
+library(ggplot2)
+library(lme4)
+raw.data <- read.csv("../data/experiment3.csv")
+
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
 
 #### PREP DATA #### 
-
-md <- melt.data.frame(raw.data, c("Sub_ID","Age","condition","agegroup"),
+md <- melt(raw.data, c("Sub_ID","Age","condition","agegroup"),
                       c("glorp","tibu","peebo", "zib", "glorp_type", 
                         "tibu_type", "peebo_type", "zib_type"))
 data <- subset(md,!grepl("type",variable))
@@ -19,7 +28,6 @@ data$Age <- as.numeric(data$Age)
 data$agegroup <- as.factor(data$agegroup)
 
 #### AGGREGATE ####
-
 mss <- ddply(data, .(contrast,agegroup,Sub_ID), summarise,
              m = mean(correct))
 ms <- ddply(mss, .(contrast,agegroup), summarise,
@@ -28,7 +36,7 @@ ms <- ddply(mss, .(contrast,agegroup), summarise,
             cih = ci.high(m))             
 
 #### ADD ADULTS ####
-adults <- read.csv("data/adults.csv")
+adults <- read.csv("../data/adults.csv")
 adults$Answer.trial1[adults$Answer.trial1==""] <- NA
 adults$Answer.trial1 <- factor(adults$Answer.trial1)
 adults$corr <- adults$Input.trial1_correct == adults$Answer.trial1
@@ -61,14 +69,14 @@ dev.off()
 #### STATS #### 
 
 glmer1 <- glmer(correct ~ contrast*agegroup
-	+ (contrast|Sub_ID) + (contrast|alien), 	
+	+ (contrast|Sub_ID) + (1|alien), 	
 	family="binomial", data=data) 
-summary(int.glmer)
+summary(glmer1)
 
 glmer2 <- glmer(correct ~ contrast*Age
-	+ (contrast|Sub_ID) + (contrast|alien), 	
+	+ (contrast|Sub_ID) + (1|alien), 	
 	family="binomial", data=data) 
-summary(int.glmer2)
+summary(glmer2)
 
 ## for t-tests
 mss <- ddply(data, .(agegroup,Sub_ID), summarise,
