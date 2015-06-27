@@ -74,7 +74,7 @@ glmer1 <- glmer(correct ~ contrast*agegroup
 summary(glmer1)
 
 glmer2 <- glmer(correct ~ contrast*Age
-	+ (contrast|Sub_ID) + (1|alien), 	
+	+ (contrast|Sub_ID) + (contrast|alien), 	
 	family="binomial", data=data) 
 summary(glmer2)
 
@@ -85,3 +85,34 @@ t.test(mss$m[mss$agegroup=="3.0-3.5"] - .5)
 t.test(mss$m[mss$agegroup=="3.5-4.0"] - .5)
 t.test(mss$m[mss$agegroup=="4.0-4.5"] - .5)
 t.test(mss$m[mss$agegroup=="4.5-5.0"] - .5)
+
+
+##### COMPARISON TO E1 #####
+e3 <- data
+
+#### PREP DATA #### 
+md <- melt(raw.data, c("Sub_ID","Age","condition","agegroup","book_type"),
+           c("glorp","tibu","peebo", "zib", "glorp_type", 
+             "tibu_type", "peebo_type", "zib_type"))
+data <- subset(md,!grepl("type",variable))
+data$contrast <- md$value[grepl("type",md$variable)]
+names(data)[6] <- "alien"
+names(data)[7] <- "correct"
+
+data$contrast <- as.factor(data$contrast)
+data$correct <- data$correct==1
+data$alien <- as.factor(data$alien)
+data$Age <- as.numeric(data$Age)
+data$agegroup <- as.factor(data$agegroup)
+
+e1 <- subset(data, book_type == "Adjective_Only"
+e1$expt <- "e1"
+e3$expt <- "e3"
+e13 <- rbind.fill(e1,e3)
+
+glmer.both <- glmer(correct ~ contrast*Age + expt*contrast + 
+                      (1|Sub_ID), 
+                    family = "binomial", 
+                    data = e13)
+summary(glmer.both)
+

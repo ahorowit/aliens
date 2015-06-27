@@ -3,7 +3,7 @@ library(plyr)
 library(reshape2)
 library(ggplot2)
 library(lme4)
-raw.data <- read.csv("data/experiment1&2.csv")
+raw.data <- read.csv("../data/experiment1&2.csv")
 
 ## for bootstrapping 95% confidence intervals
 theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
@@ -13,7 +13,7 @@ ci.high <- function(x,na.rm=T) {
   quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
 
 #### PREP DATA #### 
-md <- melt.data.frame(raw.data, c("Sub_ID","Age","condition","agegroup","book_type"),
+md <- melt(raw.data, c("Sub_ID","Age","condition","agegroup","book_type"),
                       c("glorp","tibu","peebo", "zib", "glorp_type", 
                         "tibu_type", "peebo_type", "zib_type"))
 data <- subset(md,!grepl("type",variable))

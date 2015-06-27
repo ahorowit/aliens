@@ -1,8 +1,19 @@
 rm(list=ls())
-source("~/Projects/R/Ranalysis/useful.R") # from github.com/langcog/Ranalysis
-raw.data <- read.csv("data/experiment3.csv")
+library(plyr)
+library(reshape2)
+library(ggplot2)
+library(lme4)
+raw.data <- read.csv("../data/experiment5.csv")
 
-md <- melt.data.frame(raw.data, c("Sub_ID","age","condition"),
+## for bootstrapping 95% confidence intervals
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
+
+#### PREP DATA ####
+md <- melt(raw.data, c("Sub_ID","age","condition"),
                       c("plizzle","gorpu","moki", "toba", "plizzle_type", 
                         "gorpu_type", "moki_type", "toba_type"))
 data <- subset(md,!grepl("type",variable))
