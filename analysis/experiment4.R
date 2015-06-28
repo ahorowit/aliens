@@ -3,6 +3,7 @@ library(plyr)
 library(reshape2)
 library(ggplot2)
 library(lme4)
+library(bootstrap)
 raw.data <- read.csv("../data/experiment4.csv")
 
 ## for bootstrapping 95% confidence intervals
@@ -36,9 +37,9 @@ agg.data$prop.corr <- agg.data$count / agg.data$total
 agg.data$q <- 1 - agg.data$prop.corr
 agg.data$err <- sqrt((agg.data$prop.corr * agg.data$q) / agg.data$total)
 
-
-
-plot.style <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), axis.line = element_line(colour="black",size=.5), axis.ticks = element_line(size=.5),legend.justification=c(1,0), legend.position=c(0.25,.75),legend.title=element_blank(), axis.title.x = element_text(vjust=-.5), axis.title.y = element_text(angle=90,vjust=0.25))
+#### PLOT ####
+plot.style <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(), axis.line = element_line(colour="black",size=.5), axis.ticks = element_line(size=.5),legend.justification=c(1,0), legend.position=c(0.25,.75),legend.title=element_blank(), axis.title.x = element_text(vjust=-.5), 
+                    axis.title.y = element_text(angle=90,vjust=0.25))
 
 dodge <- position_dodge(width=0.9) 
 limits <- aes(ymax = prop.corr + err, ymin=prop.corr - err) 
@@ -52,19 +53,32 @@ qplot(data = agg.data,
 	ylab="Proportion Correct Contrast Judgement",
 	xlab="Age",
 	position=dodge,
-	ylim=c(0,1))  + geom_abline(intercept=.5,slope=0,lty=2) + geom_errorbar(limits,position=dodge,width=0.25) + theme_bw() + plot.style + scale_fill_manual(values=c("orange", "red"))
+	ylim=c(0,1))  + 
+  geom_abline(intercept=.5,slope=0,lty=2) + 
+  geom_errorbar(limits,position=dodge,width=0.25) + 
+  theme_bw() + 
+  plot.style + 
+  scale_fill_manual(values=c("orange", "red"))
 	
 	
-	
-gl <- glmer(correct ~ contrastType  * age * adj + (contrastType | Subj_ID), data=data, family=binomial)
+#### STATS ###
+gl <- glmer(correct ~ contrastType  * age + 
+              (contrastType | Subj_ID) + 
+              (contrastType | alienName), 
+            data=data,             
+            family=binomial)
 summary(gl)
 
 
-gl <- glmer(correct ~  adj + age + (contrastType | Subj_ID), data=data, family=binomial)
+gl <- glmer(correct ~  adj + age + 
+              (contrastType | Subj_ID),
+            data=data, family=binomial)
 summary(gl)
 
 
-mss <- ddply(data, .(agegroup, Subj_ID), summarise, m=mean(correct))
+mss <- ddply(data, 
+             .(agegroup, Subj_ID), 
+             summarise, m=mean(correct))
 
 t.test(mss$m[mss$agegroup=="4.0--4.5"] - .5)
 t.test(mss$m[mss$agegroup=="4.5--5.0"] - .5)
@@ -78,4 +92,29 @@ t.test(mss$m[mss$agegroup=="4.0--4.5" & mss$contrastType=="feature"] - .5)
 t.test(mss$m[mss$agegroup=="4.5--5.0" & mss$contrastType=="size"] - .5)
 t.test(mss$m[mss$agegroup=="4.5--5.0" & mss$contrastType=="feature"] - .5)
 
+#### ITEM EFFECTS ####
+data$marked <- data$adj %in% c("closed","dark","dirty","empty","pointy",
+                               "short","skinny","small","soft","wet")
+iss <- ddply(data, 
+             .(contrastType, marked, adj), 
+             summarise, 
+             m = mean(correct), 
+             n = length(correct),
+             cih = ci.high(correct), 
+             cil = ci.low(correct))
 
+iss$adj <- factor(iss$adj, 
+                  levels = iss$adj[order(iss$m, decreasing=TRUE)])
+
+ggplot(iss, aes(x = adj, y = m, col = marked)) +
+  geom_linerange(aes(ymin = m - cil, ymax = m + cih)) + 
+  geom_point(aes(size = n)) +
+  geom_hline(yintercept=.5, lty=2) + 
+  ylim(c(0,1)) +
+  facet_grid(.~contrastType, scales= "free_x") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle=90,vjust=0.25)) +
+  ylab("Mean Proportion Correct") + 
+  xlab("Adjective")
+
+  

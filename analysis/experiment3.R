@@ -3,6 +3,7 @@ library(plyr)
 library(reshape2)
 library(ggplot2)
 library(lme4)
+library(bootstrap)
 raw.data <- read.csv("../data/experiment3.csv")
 
 ## for bootstrapping 95% confidence intervals
